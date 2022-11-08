@@ -59,6 +59,7 @@ export default function AddCar() {
                     required
                     type="text"
                     placeholder="Brand"
+                    minlength="2"
                     value={newCar.brand}
                     onChange={(e) => setNewCar({ ...newCar, brand: e.target.value })} />
                 <input
@@ -66,6 +67,7 @@ export default function AddCar() {
                     type="text"
                     value={newCar.model}
                     placeholder="Model"
+                    minlength="2"
                     onChange={(e) => setNewCar({ ...newCar, model: e.target.value })} />
                 <select
                     onChange={(e) => setNewCar({ ...newCar, year: e.target.value })}>
