@@ -12,6 +12,9 @@ function App() {
             <li>
               <Link to='/cars'>Cars</Link>
             </li>
+            <li>
+              <Link to='/add'>Add Car</Link>
+            </li>
           </ul>
         </nav>
       </header>

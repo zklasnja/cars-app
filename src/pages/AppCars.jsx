@@ -15,9 +15,10 @@ export default function AppCars(){
 
     return (
     <div>
+        <h2>Cars:</h2>
         <ul>
             {cars && cars.map((car) => <li key={car.id}>
-            Brand: {car.brand} Model: {car.model} Year: {car.year} Max Speed: {car.maxSpeed} Is automatic: {car.isAutomatic} Engine: {car.engine} No of doors: {car.numberOfDoors}</li>)}
+            <strong>Brand:</strong> {car.brand} <strong>Model:</strong> {car.model} <strong>Year:</strong> {car.year} <strong>Max Speed:</strong> {car.maxSpeed} <strong>Is automatic:</strong> {car.isAutomatic} <strong>Engine:</strong> {car.engine} <strong> No of doors:</strong> {car.numberOfDoors}</li>)}
         </ul>    
     </div>
     )
