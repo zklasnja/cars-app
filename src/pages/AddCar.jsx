@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Cars from "../services/Cars";
 import { useHistory } from 'react-router-dom';
+import AddCarComponent from "../components/AddCarComponent";
 
 export default function AddCar() {
     const history = useHistory();
@@ -119,8 +120,10 @@ export default function AddCar() {
                         onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <button type="submit">Submit</button>
-                <button onClick={handlePreviewForm} type="button">Preview Form</button>
-                <button onClick={handleResetForm} type="button">Reset Form</button>
+                <AddCarComponent 
+                handleResetForm={handleResetForm}
+                handlePreviewForm={handlePreviewForm}
+                />
             </form>
         </div>
     )

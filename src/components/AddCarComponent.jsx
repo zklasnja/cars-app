@@ -1,7 +1,11 @@
 import React from 'react';
 
-export default function AddCarComponent(handleResetForm){
+export default function AddCarComponent({handleResetForm, handlePreviewForm}){
 
-    return <div></div>
-    
+    return (
+        <div>
+            <button onClick={handleResetForm} type="button">Reset Form</button>
+            <button onClick={handlePreviewForm} type="button">Preview Form</button>
+        </div>
+    )
 }
