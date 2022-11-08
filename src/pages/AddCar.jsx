@@ -32,6 +32,10 @@ export default function AddCar() {
         }
     }
 
+    const handlePreviewForm = () => {
+        alert(JSON.stringify(newCar));
+    }
+
     const handleResetForm = () => {
         setNewCar({
             brand: "",
@@ -115,6 +119,7 @@ export default function AddCar() {
                         onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <button type="submit">Submit</button>
+                <button onClick={handlePreviewForm} type="button">Preview Form</button>
                 <button onClick={handleResetForm} type="button">Reset Form</button>
             </form>
         </div>
