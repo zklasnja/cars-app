@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Router from './Router';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      <header>
         <nav>
           <ul>
             <li>
