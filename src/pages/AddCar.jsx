@@ -23,13 +23,25 @@ export default function AddCar() {
     const onAddCar = (e) => {
         e.preventDefault();
 
-        const handleAddCar = async () =>{
+        const handleAddCar = async () => {
             Cars.add(newCar);
         }
-        if (handleAddCar){
+        if (handleAddCar) {
             handleAddCar();
             history.push('/cars');
         }
+    }
+
+    const handleResetForm = () => {
+        setNewCar({
+            brand: "",
+            model: "",
+            year: "",
+            maxSpeed: "",
+            numberOfDoors: "",
+            isAutomatic: false,
+            engine: "",
+        })
     }
 
     return (
@@ -72,37 +84,38 @@ export default function AddCar() {
                     <input
                         type="checkbox"
                         value={newCar.isAutomatic}
-                        onChange={(e) => setNewCar({ ...newCar, isAutomatic: e.target.checked ? e.target.checked : e.target.checked })} />
+                        onChange={(e) => setNewCar({ ...newCar, isAutomatic: e.target.checked ? e.target.checked : "" })} />
                 </label>
                 <label> diesel
                     <input
                         required
                         type="radio"
                         value="diesel"
-                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : ""})} />
+                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <label> petrol
                     <input
                         required
                         type="radio"
                         value="petrol"
-                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : ""})} />
+                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <label> electric
                     <input
                         required
                         type="radio"
                         value="electric"
-                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : ""})} />
+                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <label> hybrid
                     <input
                         required
                         type="radio"
                         value="hybrid"
-                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : ""})} />
+                        onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <button type="submit">Submit</button>
+                <button onClick={handleResetForm} type="button">Reset Form</button>
             </form>
         </div>
     )
