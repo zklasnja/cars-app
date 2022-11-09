@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CarsService from '../services/Cars';
+import Cars from '../services/Cars';
 import { useHistory } from 'react-router-dom';
 
 export default function AppCars(){
@@ -8,7 +8,7 @@ export default function AppCars(){
     const [cars, setCars] = useState();
 
     const handleGetCars = async () => {
-        const cars = await CarsService.getAll();
+        const cars = await Cars.getAll();
         setCars(cars);
     };
     
@@ -18,6 +18,13 @@ export default function AppCars(){
 
     const handleEditCar = (id) => {
         history.push(`/edit/${id}`);
+    }
+
+    const handleDeleteCar = async (id) => {
+        await Cars.delete(id);
+        
+        const cars = await Cars.getAll();
+        setCars(cars);
     }
 
     return (
@@ -33,6 +40,7 @@ export default function AppCars(){
             <strong>Engine:</strong> {car.engine} &nbsp;
             <strong> No of doors:</strong> {car.numberOfDoors} &nbsp;
             <button onClick={() => handleEditCar(car.id)}>Edit</button>
+            <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
             </li>)}
         </ul>    
     </div>

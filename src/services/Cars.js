@@ -23,6 +23,11 @@ class CarsService {
         const newRequest = axiosInstance.patch(`/cars/${id}`, request);
         return newRequest;
     }
+
+    async delete(id) {
+        const request = await axiosInstance.delete(`/cars/${id}`)
+        return request;
+    }
 }
 
 export default new CarsService();
