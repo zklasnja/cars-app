@@ -1,10 +1,11 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cars from "../services/Cars";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import AddCarComponent from "../components/AddCarComponent";
 
 export default function AddCar() {
     const history = useHistory();
+    let { id } = useParams();
 
     const [newCar, setNewCar] = useState({
         brand: "",
@@ -16,11 +17,6 @@ export default function AddCar() {
         engine: "",
     });
 
-    const years = (start = 1990, end = 2018) => {
-        return Array.apply(0, Array(end - start + 1))
-            .map((element, index) => index + start);
-    }
-
     const onAddCar = (e) => {
         e.preventDefault();
 
@@ -29,6 +25,18 @@ export default function AddCar() {
         }
         if (handleAddCar) {
             handleAddCar();
+            history.push('/cars');
+        }
+    }
+
+    const onEditCar = (e) => {
+        e.preventDefault();
+        
+        const handleEditCar = async () => {
+            await Cars.edit(id, newCar);
+        }
+        if (handleEditCar) {
+            handleEditCar();
             history.push('/cars');
         }
     }
@@ -49,14 +57,26 @@ export default function AddCar() {
         })
     }
 
+    const handleGetSingleCar = async (id) => {
+        if (id) {
+            const response = await Cars.get(id);
+            setNewCar(response);
+        }
+    }
+
+    useEffect(() => {
+        if (id) {
+            handleGetSingleCar(id)
+        }
+    }, []);
+
     return (
         <div>
             <h2>Add new car to the records:</h2>
             <AddCarComponent
-                onAddCar={onAddCar}
+                onAddCar={id ? onEditCar : onAddCar}
                 newCar={newCar}
                 setNewCar={setNewCar}
-                years={years}
                 handleResetForm={handleResetForm}
                 handlePreviewForm={handlePreviewForm}
             />

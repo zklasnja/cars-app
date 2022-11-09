@@ -1,7 +1,10 @@
 import React from 'react';
 
-export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, handleResetForm, handlePreviewForm }) {
-
+export default function AddCarComponent({ onAddCar, newCar, setNewCar, handleResetForm, handlePreviewForm }) {
+    const years = (start = 1990, end = 2018) => {
+        return Array.apply(0, Array(end - start + 1))
+            .map((element, index) => index + start);
+    }
     return (
         <div>
             <form onSubmit={onAddCar}>
@@ -48,6 +51,7 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                         required
                         type="radio"
                         value="diesel"
+                        // checked={newCar.engine ? {value} === 'yes' : {value} === 'no'}
                         onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <label> petrol
@@ -55,6 +59,7 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                         required
                         type="radio"
                         value="petrol"
+                        // checked={newCar.engine ? selected === 'yes' : selected === 'no'}
                         onChange={(e) => setNewCar({ ...newCar, engine: e.target.checked ? e.target.value : "" })} />
                 </label>
                 <label> electric
