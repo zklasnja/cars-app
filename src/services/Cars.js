@@ -8,15 +8,7 @@ class CarsService {
     }
 
     add(request) {
-        const newRequest = axiosInstance.post('/cars', {
-            brand: request.brand,
-            model: request.model,
-            year: request.year,
-            maxSpeed: request.maxSpeed,
-            numberOfDoors: request.numberOfDoors,
-            isAutomatic: request.isAutomatic,
-            engine: request.engine,
-        });
+        const newRequest = axiosInstance.post('/cars', request);
         return newRequest;
     }
 }
