@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cars from '../services/Cars';
 import { useHistory } from 'react-router-dom';
+import AppCarsComponent from "../components/AppCarsComponent";
 
-export default function AppCars(){
+export default function AppCars() {
     const history = useHistory();
 
     const [cars, setCars] = useState();
@@ -11,7 +12,7 @@ export default function AppCars(){
         const cars = await Cars.getAll();
         setCars(cars);
     };
-    
+
     useEffect(() => {
         handleGetCars()
     }, []);
@@ -21,6 +22,8 @@ export default function AppCars(){
     }
 
     const handleDeleteCar = async (id) => {
+        const choice = window.confirm("Are you sure you want to delete this car?");
+        if (!choice) return;
         await Cars.delete(id);
         
         const cars = await Cars.getAll();
@@ -28,21 +31,13 @@ export default function AppCars(){
     }
 
     return (
-    <div>
-        <h2>Cars:</h2>
-        <ul>
-            {cars && cars.map((car) => <li key={car.id}>
-            <strong>Brand:</strong> {car.brand} &nbsp;
-            <strong>Model:</strong> {car.model} &nbsp;
-            <strong>Year:</strong> {car.year} &nbsp;
-            <strong>Max Speed:</strong> {car.maxSpeed} &nbsp;
-            <strong>Is automatic:</strong> {car.isAutomatic ? "Yes" : "No"} &nbsp;
-            <strong>Engine:</strong> {car.engine} &nbsp;
-            <strong> No of doors:</strong> {car.numberOfDoors} &nbsp;
-            <button onClick={() => handleEditCar(car.id)}>Edit</button>
-            <button onClick={() => handleDeleteCar(car.id)}>Delete</button>
-            </li>)}
-        </ul>    
-    </div>
+        <div>
+            <h1><strong>Cars:</strong></h1>
+            <AppCarsComponent
+                cars={cars}
+                onEditCar={handleEditCar}
+                onDeleteCar={handleDeleteCar}
+            />
+        </div>
     )
 }

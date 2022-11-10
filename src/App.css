@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -32,7 +36,84 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
+.input-text {
+  box-sizing: border-box;
+  padding: 2px 2px;
+  border: 2px solid blue;
+  border-radius: 4px;
+  font-size:medium;
+  height: 30px;
+}
+
+.dropdown{
+  height: 30px;
+  padding: 2px 2px;
+  border: 2px solid blue;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  font-size:medium;
+}
+
+.btn {
+  display:inline-flex;
+  margin: 5px;
+  max-height: 30px;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+
+.inputs,
+.buttons,
+.check-buttons {
+  display: flex;
+  justify-content: center;
+  align-content: space-evenly;
+  gap: 10px 20px;
+}
+
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.list {
+  float: left;
+}
+
+.links {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.links:hover{
+  background-color: #111;
+}
+
+p{
+  font-size:medium;
+}
+
+h1 {
+  font-size: large;
+}
+

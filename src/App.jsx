@@ -9,11 +9,11 @@ function App() {
       <header>
         <nav>
           <ul>
-            <li>
-              <Link to='/cars'>Cars</Link>
+            <li className='list'>
+              <Link className="links" to='/cars'>Cars</Link>
             </li>
-            <li>
-              <Link to='/add'>Add Car</Link>
+            <li className='list'>
+              <Link className="links" to='/add'>Add Car</Link>
             </li>
           </ul>
         </nav>

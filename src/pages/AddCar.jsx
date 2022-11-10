@@ -17,6 +17,11 @@ export default function AddCar() {
         engine: "",
     });
 
+    const years = (start = 1990, end = 2018) => {
+        return Array.apply(0, Array(end - start + 1))
+            .map((element, index) => index + start);
+    }
+
     const onAddCar = (e) => {
         e.preventDefault();
 
@@ -79,6 +84,7 @@ export default function AddCar() {
                 setNewCar={setNewCar}
                 handleResetForm={handleResetForm}
                 handlePreviewForm={handlePreviewForm}
+                years={years}
             />
         </div>
     )
