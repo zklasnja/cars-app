@@ -10,7 +10,7 @@ export default function AppCars() {
 
     const handleGetCars = async () => {
         const cars = await Cars.getAll();
-        setCars(cars);
+        setCars(cars.data);
     };
 
     useEffect(() => {

@@ -35,24 +35,24 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                     <input
                         type="number"
                         className="input-text"
-                        value={newCar.maxSpeed}
+                        value={newCar.max_speed}
                         placeholder="Max Speed"
-                        onChange={(e) => setNewCar({ ...newCar, maxSpeed: e.target.value })} />
+                        onChange={(e) => setNewCar({ ...newCar, max_speed: e.target.value })} />
                     <input
                         required
                         type="number"
                         className="input-text"
-                        value={newCar.numberOfDoors}
+                        value={newCar.number_of_doors}
                         placeholder="Number of Doors"
-                        onChange={(e) => setNewCar({ ...newCar, numberOfDoors: e.target.value })} />
+                        onChange={(e) => setNewCar({ ...newCar, number_of_doors: e.target.value })} />
                 </div>
                 <div className='check-buttons'>
                     <label> Automatic?
                         <input
                             type="checkbox"
-                            value={newCar.isAutomatic}
-                            checked={newCar.isAutomatic}
-                            onChange={(e) => setNewCar({ ...newCar, isAutomatic: e.target.checked ? e.target.checked : "" })} />
+                            value={newCar.is_automatic}
+                            checked={newCar.is_automatic}
+                            onChange={(e) => setNewCar({ ...newCar, is_automatic: e.target.checked ? e.target.checked : "" })} />
                     </label>
                     <label>Diesel
                         <input
