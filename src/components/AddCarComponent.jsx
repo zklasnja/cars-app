@@ -8,20 +8,16 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
             <form onSubmit={onAddCar}>
                 <div className='inputs'>
                     <input
-                        required
                         type="text"
                         className="input-text"
                         placeholder="Brand"
-                        minLength="2"
                         value={newCar.brand}
                         onChange={(e) => setNewCar({ ...newCar, brand: e.target.value })} />
                     <input
-                        required
                         type="text"
                         className="input-text"
                         value={newCar.model}
                         placeholder="Model"
-                        minLength="2"
                         onChange={(e) => setNewCar({ ...newCar, model: e.target.value })} />
                     <select
                         value={newCar.year}
@@ -39,7 +35,6 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                         placeholder="Max Speed"
                         onChange={(e) => setNewCar({ ...newCar, max_speed: e.target.value })} />
                     <input
-                        required
                         type="number"
                         className="input-text"
                         value={newCar.number_of_doors}
@@ -56,7 +51,6 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                     </label>
                     <label>Diesel
                         <input
-                            required
                             type="radio"
                             value="diesel"
                             checked={newCar.engine === "diesel"}
@@ -64,7 +58,6 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                     </label>
                     <label>Petrol
                         <input
-                            required
                             type="radio"
                             value="petrol"
                             checked={newCar.engine === "petrol"}
@@ -72,7 +65,6 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                     </label>
                     <label>Electric
                         <input
-                            required
                             type="radio"
                             value="electric"
                             checked={newCar.engine === "electric"}
@@ -80,7 +72,6 @@ export default function AddCarComponent({ onAddCar, newCar, setNewCar, years, ha
                     </label>
                     <label>Hybrid
                         <input
-                            required
                             type="radio"
                             value="hybrid"
                             checked={newCar.engine === "hybrid"}

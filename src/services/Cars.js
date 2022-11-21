@@ -7,9 +7,13 @@ class CarsService {
         return response.data;
     }
 
-    add(request) {
-        const newRequest = axiosInstance.post('/cars', request);
-        return newRequest;
+    async add(request) {
+        try {
+            const newRequest = await axiosInstance.post('/cars', request);
+            return newRequest;
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     async get(id) {
