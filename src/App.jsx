@@ -15,6 +15,9 @@ function App() {
             <li className='list'>
               <Link className="links" to='/add'>Add Car</Link>
             </li>
+            <li className='list'>
+              <Link className="links" to='/login'>Login</Link>
+            </li>
           </ul>
         </nav>
       </header>

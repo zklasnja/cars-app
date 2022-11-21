@@ -22,17 +22,27 @@ export default function AddCar() {
             .map((element, index) => index + start);
     }
 
-    const onAddCar = (e) => {
+    const onAddCar = async (e) => {
         e.preventDefault();
 
-        const handleAddCar = async () => {
-            await Cars.add(newCar);
-        }
-        if (handleAddCar) {
-            handleAddCar();
+        const response = await Cars.add(newCar);
+        
+        if (response) {
             history.push('/cars');
+            return response;
         }
     }
+
+    // const handleOnLogin = async (e) => {
+    //     e.preventDefault();
+        
+    //     const response = await authService.login(user);
+    //     if (response){
+    //         setUser(user);
+    //         history.push('/cars');
+    //         return response;
+    //     }
+    // };
 
     const onEditCar = (e) => {
         e.preventDefault();
