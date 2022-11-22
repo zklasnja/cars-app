@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Router from './Router';
+import Navbar from './pages/Navbar';
 
 function App() {
   return (
@@ -9,15 +10,7 @@ function App() {
       <header>
         <nav>
           <ul>
-            <li className='list'>
-              <Link className="links" to='/cars'>Cars</Link>
-            </li>
-            <li className='list'>
-              <Link className="links" to='/add'>Add Car</Link>
-            </li>
-            <li className='list'>
-              <Link className="links" to='/login'>Login</Link>
-            </li>
+            <Navbar />
           </ul>
         </nav>
       </header>

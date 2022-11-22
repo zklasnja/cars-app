@@ -12,7 +12,7 @@ export default function AppCarsComponent({ cars, onEditCar, onDeleteCar }) {
                 <strong>Max Speed:</strong> {car.maxSpeed} &nbsp;
                 <strong>Is automatic:</strong> {car.isAutomatic ? "Yes" : "No"} &nbsp;
                 <strong>Engine:</strong> {car.engine} &nbsp;
-                <strong> No of doors:</strong> {car.numberOfDoors} &nbsp;
+                <strong> No of doors:</strong> {car.number_of_doors} &nbsp;
                 <button className="btn btn-blue" onClick={() => onEditCar(car.id)}>Edit</button>
                 <button className="btn btn-blue" onClick={() => onDeleteCar(car.id)}>Delete</button>
                 </p>

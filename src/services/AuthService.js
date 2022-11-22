@@ -18,7 +18,18 @@ class AuthService {
     } catch (error) { }
   }
 
-  register() { }
+  async register(data) {
+    try {
+      let response = await this.axiosInstance.post("/register", data);
+      if (response.data) {
+        localStorage.setItem("token", response.data.authorisation.token);
+        this.setAxiosAuthorisationHeader(response.data.authorisation.token);
+        return response;
+      }
+    } catch (error) {
+      alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
+    }
+   }
 
   async login(data) {
     try {
@@ -29,20 +40,29 @@ class AuthService {
         return response;
       }
     } catch (error) {
-      console.log(error)
-      alert(JSON.stringify([{Error: error.message}, {Message: error.response.data.message}]))
+      alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
     }
   }
 
-  logout() { }
+  async logout() {
+    try {
+      this.setAxiosAuthorisationHeader();
+      await this.axiosInstance.post("/logout");
+      localStorage.clear();
+      
+      // if (response.data) {
+      //   return response;
+      // }
+    } catch (error) { }
+  }
 
   async refresh() {
     try {
+      this.setAxiosAuthorisationHeader();
       const response = await this.axiosInstance.post("/refresh");
 
       if (response.data) {
         localStorage.setItem("token", response.data.authorisation.token);
-        this.setAxiosAuthorisationHeader(response.data.authorisation.token);
       }
     } catch (error) { }
   }

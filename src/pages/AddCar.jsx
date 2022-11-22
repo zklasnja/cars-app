@@ -33,17 +33,6 @@ export default function AddCar() {
         }
     }
 
-    // const handleOnLogin = async (e) => {
-    //     e.preventDefault();
-        
-    //     const response = await authService.login(user);
-    //     if (response){
-    //         setUser(user);
-    //         history.push('/cars');
-    //         return response;
-    //     }
-    // };
-
     const onEditCar = (e) => {
         e.preventDefault();
 

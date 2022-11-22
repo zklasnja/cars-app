@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import AppCars from './pages/AppCars';
 import AddCar from "./pages/AddCar";
 import AppLogin from "./pages/AppLogin";
+import AppLogout from "./pages/AppLogout";
+import RegisterPage from "./pages/AppRegister";
 
 export default function Router(){
     return (
@@ -19,8 +21,14 @@ export default function Router(){
           <Route path='/delete/:id'>
             <AppCars />
           </Route>
+          <Route path='/register'>
+            <RegisterPage />
+          </Route>
           <Route path='/login'>
             <AppLogin />
+          </Route>
+          <Route path='/logout'>
+            <AppLogout />
           </Route>
         </Switch>
     )

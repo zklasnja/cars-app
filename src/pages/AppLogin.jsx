@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { authService } from "../services/AuthService";
 import AppLoginComponent from "../components/AppLoginComponent";
 import { useHistory } from "react-router-dom";
-
+import { handleRefresh } from "../helpers/helper";
 
 export default function LoginPage() {
     const history = useHistory();
@@ -17,11 +17,7 @@ export default function LoginPage() {
             history.push('/cars');
             return response;
         }
-    };
-    
-    const handleRefresh = async () => {
-        await authService.refresh();
-    };
+    };    
 
     return (
         <AppLoginComponent 
