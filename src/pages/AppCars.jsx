@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import AppCarsComponent from "../components/AppCarsComponent";
 
 export default function AppCars() {
+
     const history = useHistory();
 
     const [cars, setCars] = useState();
@@ -20,7 +21,7 @@ export default function AppCars() {
     const handleEditCar = (id) => {
         history.push(`/edit/${id}`);
     }
-
+    
     const handleDeleteCar = async (id) => {
         const choice = window.confirm("Are you sure you want to delete this car?");
         if (!choice) return;

@@ -26,9 +26,21 @@ class CarsService {
         }
     }
 
-    edit(id, request) {
-        const newRequest = this.axiosInstance.patch(`/cars/${id}`, request);
-        return newRequest;
+    async edit(id, request) {
+        try {
+            const newRequest = await this.axiosInstance.patch(`/cars/${id}`, {
+                brand: request.brand,
+                engine: request.engine,
+                is_automatic: request.is_automatic,
+                max_speed: request.max_speed,
+                model: request.model,
+                number_of_doors: request.number_of_doors,
+                year: request.year,
+            });
+            return newRequest;
+        } catch (error){
+            alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
+        }
     }
 
     async delete(id) {

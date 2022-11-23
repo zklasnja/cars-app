@@ -5,12 +5,16 @@ import AddCar from "./pages/AddCar";
 import AppLogin from "./pages/AppLogin";
 import AppLogout from "./pages/AppLogout";
 import RegisterPage from "./pages/AppRegister";
+import SingleCarPage from "./pages/AppSingleCar";
 
 export default function Router(){
     return (
         <Switch>
-          <Route default path='/cars'>
+          <Route exact path='/cars'>
             <AppCars />
+          </Route>
+          <Route path='/cars/:carId'>
+            <SingleCarPage />
           </Route>
           <Route path='/add'>
             <AddCar />

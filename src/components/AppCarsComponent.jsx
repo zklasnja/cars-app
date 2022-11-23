@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function AppCarsComponent({ cars, onEditCar, onDeleteCar }) {
@@ -13,6 +14,7 @@ export default function AppCarsComponent({ cars, onEditCar, onDeleteCar }) {
                 <strong>Is automatic:</strong> {car.isAutomatic ? "Yes" : "No"} &nbsp;
                 <strong>Engine:</strong> {car.engine} &nbsp;
                 <strong> No of doors:</strong> {car.number_of_doors} &nbsp;
+                <Link to={`/cars/${car.id}`}>View</Link>
                 <button className="btn btn-blue" onClick={() => onEditCar(car.id)}>Edit</button>
                 <button className="btn btn-blue" onClick={() => onDeleteCar(car.id)}>Delete</button>
                 </p>
