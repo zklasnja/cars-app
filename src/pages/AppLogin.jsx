@@ -1,30 +1,26 @@
 import React, { useState } from "react";
-import { authService } from "../services/AuthService";
 import AppLoginComponent from "../components/AppLoginComponent";
-import { useHistory } from "react-router-dom";
 import { handleRefresh } from "../helpers/helper";
+import useAuth from "../hooks/useAuth";
 
 export default function LoginPage() {
-    const history = useHistory();
-    const [user, setUser] = useState({ email: "", password: "" });
+    const [newUser, setNewUser] = useState({ email: "", password: "" });
+
+    const { user, login } = useAuth();
 
     const handleOnLogin = async (e) => {
         e.preventDefault();
-        
-        const response = await authService.login(user);
-        if (response){
-            setUser(user);
-            history.push('/cars');
-            return response;
-        }
-    };    
+        try {
+            await login(newUser);
+        } catch (error) { }
+};
 
-    return (
-        <AppLoginComponent 
-        user={user}
-        setUser={setUser}
+return (
+    <AppLoginComponent
+        newUser={newUser}
+        setNewUser={setNewUser}
         handleRefresh={handleRefresh}
         handleOnLogin={handleOnLogin}
-        />
-    );
+    />
+);
 }

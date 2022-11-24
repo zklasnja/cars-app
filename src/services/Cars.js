@@ -3,16 +3,19 @@ import { httpService } from "./HttpService";
 class CarsService {
     constructor() {
         this.axiosInstance = httpService.axiosInstance;
+        this.headers = {headers: {
+            Authorisation: `Bearer ${localStorage.getItem('token')}`
+        }}
     }
 
     async getAll() {
-        const response = await this.axiosInstance.get('/cars');
+        const response = await this.axiosInstance.get('/cars', this.headers);
         return response.data;
     }
 
     async add(request) {
         try {
-            const newRequest = await this.axiosInstance.post('/cars', request);
+            const newRequest = await this.axiosInstance.post('/cars', request, this.headers);
             return newRequest;
         } catch (error) {
             alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
@@ -20,7 +23,7 @@ class CarsService {
     }
 
     async get(id) {
-        const request = await this.axiosInstance.get(`/cars/${id}`)
+        const request = await this.axiosInstance.get(`/cars/${id}`, this.headers)
         if (request) {
             return request.data;
         }
@@ -36,7 +39,7 @@ class CarsService {
                 model: request.model,
                 number_of_doors: request.number_of_doors,
                 year: request.year,
-            });
+            }, this.headers);
             return newRequest;
         } catch (error){
             alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
@@ -44,7 +47,7 @@ class CarsService {
     }
 
     async delete(id) {
-        const request = await this.axiosInstance.delete(`/cars/${id}`)
+        const request = await this.axiosInstance.delete(`/cars/${id}`, this.headers)
         return request;
     }
 }

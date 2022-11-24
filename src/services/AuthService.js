@@ -12,7 +12,7 @@ class AuthService {
 
       if (token) {
         this.axiosInstance.defaults.headers.common[
-          "Authorisation"
+          "Authorization"
         ] = `Bearer ${token}`;
       }
     } catch (error) { }
@@ -29,8 +29,8 @@ class AuthService {
     } catch (error) {
       alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
     }
-   }
-
+  }
+  
   async login(data) {
     try {
       let response = await this.axiosInstance.post("/login", data);
@@ -46,25 +46,20 @@ class AuthService {
 
   async logout() {
     try {
-      this.setAxiosAuthorisationHeader();
-      await this.axiosInstance.post("/logout");
-      localStorage.clear();
-      
-      // if (response.data) {
-      //   return response;
-      // }
+      const response = await this.axiosInstance.post("/logout");
+      return response;
     } catch (error) { }
   }
-
+  
   async refresh() {
     try {
-      this.setAxiosAuthorisationHeader();
       const response = await this.axiosInstance.post("/refresh");
 
       if (response.data) {
-        localStorage.setItem("token", response.data.authorisation.token);
+        localStorage.setItem("token", response.data.authorization.token);
+        this.setAxiosAuthorizationHeader(response.data.authorization.token);
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 }
 

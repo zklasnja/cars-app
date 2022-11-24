@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function AppLoginComponent({ user, setUser, handleOnLogin, handleRefresh}) {
+export default function AppLoginComponent({ newUser, setNewUser, handleOnLogin}) {
 
     return (
         <div>
@@ -10,20 +10,19 @@ export default function AppLoginComponent({ user, setUser, handleOnLogin, handle
                     required
                     type="email"
                     name="name"
-                    value={user.email}
-                    onChange={({ target }) => setUser({ ...user, email: target.value })}
+                    value={newUser.email}
+                    onChange={({ target }) => setNewUser({ ...newUser, email: target.value })}
                 />
                 <input
                     required
                     type="password"
-                    value={user.password}
+                    value={newUser.password}
                     onChange={({ target }) =>
-                        setUser({ ...user, password: target.value })
+                        setNewUser({ ...newUser, password: target.value })
                     }
                 />
                 <button type="submit">Login</button>
             </form>
-            <button onClick={handleRefresh}>Refresh</button>
         </div>
     )
 }

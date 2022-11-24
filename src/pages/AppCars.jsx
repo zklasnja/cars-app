@@ -15,7 +15,7 @@ export default function AppCars() {
     };
 
     useEffect(() => {
-        handleGetCars()
+        handleGetCars();
     }, []);
 
     const handleEditCar = (id) => {

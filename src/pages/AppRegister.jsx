@@ -2,35 +2,34 @@ import React, { useState } from "react";
 import AppRegisterComponent from "../components/AppRegisterComponent";
 import { authService } from "../services/AuthService";
 import { useHistory } from 'react-router-dom';
-
+import useAuth from "../hooks/useAuth";
 
 export default function RegisterPage() {
     const history = useHistory();
-    const [user, setUser] = useState({
+    const [newUser, setNewUser] = useState({
         name: "",
         email: "",
         password: ""
     });
-    const [confirmPassword, setConfirmPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const { user, register } = useAuth();
+
 
     const handleOnRegister = async (e) => {
         e.preventDefault();
-        if (user.password === confirmPassword) {
-            const response = await authService.register(user);
-    
-            if (response) {
-                history.push('/login');
-                return response;
+        try {
+            if (newUser.password === confirmPassword) {
+                await register(newUser);
+            } else {
+                alert("Password and confirm password are not matching!");
             }
-        } else {
-            alert("Password and confirm password are not matching!");
-        }
+        } catch (error) { }
     }
 
     return <div>
         <AppRegisterComponent
-            user={user}
-            setUser={setUser}
+            newUser={newUser}
+            setNewUser={setNewUser}
             handleOnRegister={handleOnRegister}
             setConfirmPassword={setConfirmPassword}
             confirmPassword={confirmPassword}

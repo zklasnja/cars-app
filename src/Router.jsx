@@ -1,5 +1,7 @@
 import React from "react";
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import useAuth from "./hooks/useAuth";
+
 import AppCars from './pages/AppCars';
 import AddCar from "./pages/AddCar";
 import AppLogin from "./pages/AppLogin";
@@ -7,33 +9,49 @@ import AppLogout from "./pages/AppLogout";
 import RegisterPage from "./pages/AppRegister";
 import SingleCarPage from "./pages/AppSingleCar";
 
+const AuthRoute = ({ children, ...rest }) => {
+  const { user } = useAuth();
+
+  return (
+    <Route {...rest}>{user.name ? children : <Redirect to="/login" />}</Route>
+  );
+};
+
+const GuestRoute = ({ children, ...rest }) => {
+  const { user } = useAuth();
+
+  return (
+    <Route {...rest}>{user.name ? <Redirect to="/cars" /> : children}</Route>
+  );
+};
+
 export default function Router(){
     return (
         <Switch>
-          <Route exact path='/cars'>
+          <AuthRoute exact path='/cars'>
             <AppCars />
-          </Route>
-          <Route path='/cars/:carId'>
+          </AuthRoute>
+          <AuthRoute path='/cars/:carId'>
             <SingleCarPage />
-          </Route>
-          <Route path='/add'>
+          </AuthRoute>
+          <AuthRoute path='/add'>
             <AddCar />
-          </Route>
-          <Route path='/edit/:id'>
+          </AuthRoute>
+          <AuthRoute path='/edit/:id'>
             <AddCar />
-          </Route>
-          <Route path='/delete/:id'>
+          </AuthRoute>
+          <AuthRoute path='/delete/:id'>
             <AppCars />
-          </Route>
-          <Route path='/register'>
+          </AuthRoute>
+          <GuestRoute path='/register'>
             <RegisterPage />
-          </Route>
-          <Route path='/login'>
+          </GuestRoute>
+          <GuestRoute path='/login'>
             <AppLogin />
-          </Route>
-          <Route path='/logout'>
-            <AppLogout />
-          </Route>
+          </GuestRoute>
+          <AuthRoute path='/logout'>
+            {/* <AppLogout /> */}
+          </AuthRoute>
         </Switch>
     )
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function AppRegisterComponent({ user, setUser, handleOnRegister, handleConfirmPassword, confirmPassword, setConfirmPassword}) {
+export default function AppRegisterComponent({ newUser, setNewUser, handleOnRegister, confirmPassword, setConfirmPassword}) {
 
     return (
         <div>
@@ -10,22 +10,21 @@ export default function AppRegisterComponent({ user, setUser, handleOnRegister, 
                     placeholder="Name"
                     type="text"
                     name="name"
-                    value={user.name}
-                    onChange={({ target }) => setUser({ ...user, name: target.value })}
+                    value={newUser.name}
+                    onChange={({ target }) => setNewUser({ ...newUser, name: target.value })}
                     />
                 <input
                     placeholder="Email"
                     type="email"
                     name="email"
-                    value={user.email}
-                    onChange={({ target }) => setUser({ ...user, email: target.value })}
+                    value={newUser.email}
+                    onChange={({ target }) => setNewUser({ ...newUser, email: target.value })}
                 />
                 <input
                     placeholder="Password"
                     type="password"
-                    value={user.password}
-                    onChange={({ target }) =>
-                        setUser({ ...user, password: target.value })
+                    value={newUser.password}
+                    onChange={({ target }) => setNewUser({ ...newUser, password: target.value })
                     }
                 />
                 <input
@@ -33,8 +32,7 @@ export default function AppRegisterComponent({ user, setUser, handleOnRegister, 
                     type="password"
                     name="confirmPassword"
                     value={confirmPassword}
-                    onChange={({ target }) =>
-                    setConfirmPassword(target.value)}
+                    onChange={({ target }) => setConfirmPassword(target.value)}
                 />
                 <button type="submit">Register</button>
             </form>
