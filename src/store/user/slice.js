@@ -4,17 +4,18 @@ export const userSlice = createSlice({
     name: 'user',
     initialState: {
         userEmail: null,
+        token: localStorage.getItem('token'),
     },
     reducers: {
         login: (state, action) => {
             state.userEmail = action.payload.email;
         },
-        logout: (state) => {
-            state.userEmail = null;
-        }
+        // refresh: (state) => {
+        //     state.token = action.payload.token;
+        // }
     }
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, refresh } = userSlice.actions;
 
 export default userSlice.reducer;

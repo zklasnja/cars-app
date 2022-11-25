@@ -1,8 +1,8 @@
-import './App.css';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Router from './Router';
-import Navbar from './pages/Navbar';
+import "./App.css";
+import React from "react";
+import { Link } from "react-router-dom";
+import Router from "./Router";
+import Navbar from "./pages/Navbar";
 
 function App() {
   return (

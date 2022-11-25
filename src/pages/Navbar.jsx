@@ -1,9 +1,14 @@
-import React, { useReducer } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
+import { useDispatch } from 'react-redux';
+import { getAll } from "../store/cars/slice";
+import Cars from '../services/Cars';
+
 
 export default function Navbar() {
     const { user, logout } = useAuth();
+    
 
     return (
         <div>
@@ -27,6 +32,7 @@ export default function Navbar() {
                 <li className='list'>
                     <Link className="links" to='/login'>Login</Link>
                 </li>}
+                
         </div>
     )
 }

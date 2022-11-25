@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const carsSlice = createSlice({
-  name: 'cars',
+  name: "cars",
   initialState: {
     cars: null,
-},
+    data: null,
+  },
   reducers: {
-   getAll: (state, action) => {
-    state.data = action.payload;
-   }
-  }
+    getAll: (state, action) => {
+      state.data = action.payload;
+    },
+  },
 });
 
 export const { getAll } = carsSlice.actions;
 
 export default carsSlice.reducer; // reducer
 
-export const selectAllCars = state => state.cars;
+export const selectAllCars = (state) => state.cars;
 
-export const selectCarById = (state, carId) => state.cars.find(car => car.id === carId);
+export const selectCarById = (state, carId) =>
+  state.cars.find((car) => car.id === carId);

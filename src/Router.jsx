@@ -5,7 +5,6 @@ import useAuth from "./hooks/useAuth";
 import AppCars from './pages/AppCars';
 import AddCar from "./pages/AddCar";
 import AppLogin from "./pages/AppLogin";
-import AppLogout from "./pages/AppLogout";
 import RegisterPage from "./pages/AppRegister";
 import SingleCarPage from "./pages/AppSingleCar";
 

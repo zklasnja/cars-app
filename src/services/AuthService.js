@@ -5,11 +5,10 @@ class AuthService {
     this.axiosInstance = httpService.axiosInstance;
     this.setAxiosAuthorisationHeader();
   }
-
+  
   setAxiosAuthorisationHeader(tokenParam = null) {
     try {
       let token = tokenParam ? tokenParam : localStorage.getItem("token");
-
       if (token) {
         this.axiosInstance.defaults.headers.common[
           "Authorization"
@@ -54,11 +53,11 @@ class AuthService {
   async refresh() {
     try {
       const response = await this.axiosInstance.post("/refresh");
-
       if (response.data) {
-        localStorage.setItem("token", response.data.authorization.token);
-        this.setAxiosAuthorizationHeader(response.data.authorization.token);
+        localStorage.setItem("token", response.data.authorisation.token);
+        this.setAxiosAuthorisationHeader(response.data.authorisation.token);
       }
+      return response;
     } catch (error) {}
   }
 }

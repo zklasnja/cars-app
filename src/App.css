@@ -44,6 +44,7 @@
 
 .input-text {
   box-sizing: border-box;
+  margin: 12px 10px;
   padding: 2px 2px;
   border: 2px solid blue;
   border-radius: 4px;
@@ -60,21 +61,6 @@
   font-size:medium;
 }
 
-.btn {
-  display:inline-flex;
-  margin: 5px;
-  max-height: 30px;
-  border-radius: 4px;
-  padding: 4px 10px;
-}
-
-.btn-blue {
-  @apply bg-blue-500 text-white;
-}
-
-.btn-blue:hover {
-  @apply bg-blue-700;
-}
 
 .inputs,
 .buttons,
@@ -82,7 +68,7 @@
   display: flex;
   justify-content: center;
   align-content: space-evenly;
-  gap: 10px 20px;
+  gap: 10px 10px;
 }
 
 nav {
@@ -117,3 +103,13 @@ h1 {
   font-size: large;
 }
 
+
+.form-flex{
+  display: flex;
+  position: relative;
+  margin: 50px 50px;
+  padding: 10px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 20px;
+}

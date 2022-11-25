@@ -33,16 +33,18 @@ export function AuthProvider({ children }) {
             const response = await authService.register(data);
             setUser(response.data.user);
             history.push("/login");
-        } catch (error) {}
-     }
+        } catch (error) { }
+    }
 
-     const handleRefreshToken = async () => {
+    const handleRefreshToken = async () => {
         const token = handleGetItemFromLS('token');
-        if (token){
+        if (!!token) {
             try {
                 const response = await authService.refresh();
                 setUser(response.data.user);
-              } catch (error) {}
+            } catch (error) { 
+                console.log('neka greska')
+            }
         }
     }
 
@@ -51,6 +53,7 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
+        handleGetItemFromLS('token');
         handleRefreshToken();
     }, []);
 
