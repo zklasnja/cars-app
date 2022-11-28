@@ -101,14 +101,18 @@ export default function AppCarsComponent() {
       <button className="btn btn-blue" onClick={() => handleSorting(4)}>
         Sort by Max Speed desc
       </button>
-      {carsData?.data?.map((car) => (
-        <AppCarRow
-          key={car.id}
-          {...car}
-          selectedCarsIds={selectedCarsIds}
-          setSelectedCarsIds={setSelectedCarsIds}
-        />
-      ))}
+      {carsData?.data?.length ? (
+        carsData?.data?.map((car) => (
+          <AppCarRow
+            key={car.id}
+            {...car}
+            selectedCarsIds={selectedCarsIds}
+            setSelectedCarsIds={setSelectedCarsIds}
+          />
+        ))
+      ) : (
+        <p>There are no result found</p>
+      )}
       <br />
       <button className="btn btn-blue" onClick={handlePreviousPage}>
         Previous

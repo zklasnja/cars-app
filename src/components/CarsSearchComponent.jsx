@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import debounce from "lodash.debounce";
-import Cars from "../services/Cars";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll, setSearchTerm } from "../store/cars/slice";
+import { setSearchTerm } from "../store/cars/slice";
 import { selectSearchterm } from "../store/cars/selector";
 
 export default function CarsSearchComponent() {
