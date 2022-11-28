@@ -1,8 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Cars from "../services/Cars";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCarsData } from "../store/cars/selector";
+import { useDispatch } from "react-redux";
 import { getAll } from "../store/cars/slice";
 
 export default function AppCarRow({
@@ -19,7 +18,6 @@ export default function AppCarRow({
 }) {
   const history = useHistory();
   const dispath = useDispatch();
-  const carsData = useSelector(selectCarsData);
   const isSelected = selectedCarsIds.includes(id);
 
   const handleEditCar = (id) => {

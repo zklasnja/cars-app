@@ -42,9 +42,10 @@
   }
 }
 
-.input-text {
+.input-text,
+.dropdown {
   box-sizing: border-box;
-  margin: 12px 10px;
+  margin: 5px 5px;
   padding: 2px 2px;
   border: 2px solid blue;
   border-radius: 4px;
@@ -52,19 +53,13 @@
   height: 30px;
 }
 
-.dropdown{
-  height: 30px;
-  padding: 2px 2px;
-  border: 2px solid blue;
-  border-radius: 4px;
+.dropdown{ 
   background-color: #f1f1f1;
-  font-size:medium;
 }
 
 .btn {
   display:inline-flex;
   margin: 5px;
-  max-height: 30px;
   border-radius: 4px;
   padding: 4px 10px;
 }
@@ -78,12 +73,17 @@
 }
 
 .inputs,
-.buttons,
-.check-buttons {
+.buttons {
   display: flex;
   justify-content: center;
-  align-content: space-evenly;
   gap: 10px 10px;
+  padding: 5px 5px;
+}
+
+.check-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 nav {
