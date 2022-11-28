@@ -10,10 +10,10 @@ class CarsService {
     };
   }
 
-  async getAll(searchTerm) {
+  async getAll(params) {
     const response = await this.axiosInstance.get(
       "/cars",
-      { params: { searchTerm } },
+      { params },
       this.headers
     );
     return response.data;

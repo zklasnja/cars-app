@@ -1,3 +1,3 @@
-const selectCarsData = (state) => state.cars.data;
+export const selectCarsData = (state) => state.cars.cars;
 
-export { selectCarsData };
+export const selectSearchterm = (state) => state.cars.searchTerm;

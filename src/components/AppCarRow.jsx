@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Cars from "../services/Cars";
-import { getAll } from "../store/cars/slice";
 
 export default function AppCarRow({
   brand,
@@ -16,7 +14,6 @@ export default function AppCarRow({
   selectedCarsIds,
   setSelectedCarsIds,
 }) {
-  const dispatch = useDispatch();
   const history = useHistory();
   const isSelected = selectedCarsIds.includes(id);
 
@@ -28,9 +25,6 @@ export default function AppCarRow({
     const choice = window.confirm("Are you sure you want to delete this car?");
     if (!choice) return;
     await Cars.delete(id);
-
-    const cars = await Cars.getAll();
-    dispatch(getAll(cars.data));
   };
 
   const handleSelectCar = () => {

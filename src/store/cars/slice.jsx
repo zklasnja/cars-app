@@ -4,16 +4,19 @@ export const carsSlice = createSlice({
   name: "cars",
   initialState: {
     cars: null,
-    data: null,
+    searchTerm: "",
   },
   reducers: {
     getAll: (state, action) => {
-      state.data = action.payload;
+      state.cars = action.payload;
+    },
+    setSearchTerm: (state, { payload }) => {
+      state.searchTerm = payload;
     },
   },
 });
 
-export const { getAll } = carsSlice.actions;
+export const { getAll, setSearchTerm } = carsSlice.actions;
 
 export default carsSlice.reducer; // reducer
 

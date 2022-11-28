@@ -61,6 +61,21 @@
   font-size:medium;
 }
 
+.btn {
+  display:inline-flex;
+  margin: 5px;
+  max-height: 30px;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
 
 .inputs,
 .buttons,

@@ -1,70 +1,107 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cars from "../services/Cars";
-import { selectCarsData } from "../store/cars/selector";
+import { selectCarsData, selectSearchterm } from "../store/cars/selector";
 import { getAll } from "../store/cars/slice";
 import AppCarRow from "./AppCarRow";
-import { Form } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 
 export default function AppCarsComponent() {
   const dispatch = useDispatch();
-  const cars = useSelector(selectCarsData);
+  const carsData = useSelector(selectCarsData);
+  const searchTerm = useSelector(selectSearchterm);
   const [selectedCarsIds, setSelectedCarsIds] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    handleGetCars();
-  }, []);
+    handleGetCars({
+      page,
+      searchTerm,
+    });
+  }, [page, searchTerm]);
 
-  const handleGetCars = async () => {
-    const cars = await Cars.getAll();
-    dispatch(getAll(cars.data));
+  const handleGetCars = async (params) => {
+    const response = await Cars.getAll(params);
+    dispatch(getAll(response));
   };
 
-  const selectAll = () => setSelectedCarsIds(cars.map((c) => c.id));
+  const selectAll = () => setSelectedCarsIds(carsData.data.map((c) => c.id));
   const deselectAll = () => setSelectedCarsIds([]);
 
-  const sortByBrandAsc = () => {
-    const sortedCars = [...cars].sort((a, b) => (a.brand > b.brand ? 1 : -1));
-    dispatch(getAll(sortedCars));
+  const handleSorting = (id) => {
+    const sortedCars = [...carsData.data];
+    switch (id) {
+      case 1:
+        dispatch(
+          getAll({
+            ...carsData,
+            data: sortedCars.sort((a, b) => (a.brand > b.brand ? 1 : -1)),
+          })
+        );
+        break;
+      case 2:
+        dispatch(
+          getAll({
+            ...carsData,
+            data: sortedCars.sort((a, b) => (a.brand < b.brand ? 1 : -1)),
+          })
+        );
+        break;
+      case 3:
+        dispatch(
+          getAll({
+            ...carsData,
+            data: sortedCars.sort((a, b) => a.max_speed - b.max_speed),
+          })
+        );
+        break;
+      case 4:
+        dispatch(
+          getAll({
+            ...carsData,
+            data: sortedCars.sort((a, b) => b.max_speed - a.max_speed),
+          })
+        );
+        break;
+    }
   };
-  const sortByBrandDesc = () => {
-    const sortedCars = [...cars].sort((a, b) => (a.brand < b.brand ? 1 : -1));
-    dispatch(getAll(sortedCars));
+
+  const handleNextPage = () => {
+    if (page === carsData.last_page) {
+      return;
+    }
+    setPage(page + 1);
   };
-  const sortByMaxSpeedAsc = () => {
-    const sortedCars = [...cars].sort((a, b) => a.max_speed - b.max_speed);
-    dispatch(getAll(sortedCars));
-  };
-  const sortByMaxSpeedDesc = () => {
-    const sortedCars = [...cars].sort((a, b) => b.max_speed - a.max_speed);
-    dispatch(getAll(sortedCars));
+
+  const handlePreviousPage = () => {
+    if (page === 1) {
+      return;
+    }
+    setPage(page - 1);
   };
 
   return (
     <ul>
       {selectedCarsIds.length}
       <br />
-
-      <Button variant="secondary" onClick={selectAll}>
+      <button className="btn btn-blue" onClick={selectAll}>
         Select All
-      </Button>
-      <Button variant="secondary" onClick={deselectAll}>
+      </button>
+      <button className="btn btn-blue" onClick={deselectAll}>
         Deselect All
-      </Button>
-      <Button variant="secondary" onClick={sortByBrandAsc}>
+      </button>
+      <button className="btn btn-blue" onClick={() => handleSorting(1)}>
         Sort by Brand asc
-      </Button>
-      <Button variant="secondary" onClick={sortByBrandDesc}>
+      </button>
+      <button className="btn btn-blue" onClick={() => handleSorting(2)}>
         Sort by Brand desc
-      </Button>
-      <Button variant="secondary" onClick={sortByMaxSpeedAsc}>
+      </button>
+      <button className="btn btn-blue" onClick={() => handleSorting(3)}>
         Sort by Max Speed asc
-      </Button>
-      <Button variant="secondary" onClick={sortByMaxSpeedDesc}>
+      </button>
+      <button className="btn btn-blue" onClick={() => handleSorting(4)}>
         Sort by Max Speed desc
-      </Button>
-      {cars?.map((car) => (
+      </button>
+      {carsData?.data?.map((car) => (
         <AppCarRow
           key={car.id}
           {...car}
@@ -72,6 +109,14 @@ export default function AppCarsComponent() {
           setSelectedCarsIds={setSelectedCarsIds}
         />
       ))}
+      <br />
+      <button className="btn btn-blue" onClick={handlePreviousPage}>
+        Previous
+      </button>
+      Page: {page}
+      <button className="btn btn-blue" onClick={handleNextPage}>
+        Next
+      </button>
     </ul>
   );
 }

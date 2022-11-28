@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import debounce from "lodash.debounce";
 import Cars from "../services/Cars";
-import { useDispatch } from "react-redux";
-import { getAll } from "../store/cars/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { getAll, setSearchTerm } from "../store/cars/slice";
+import { selectSearchterm } from "../store/cars/selector";
 
 export default function CarsSearchComponent() {
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchTerm = useSelector(selectSearchterm);
 
-  const handleSearch = async (searchItem) => {
-    setSearchTerm(searchItem);
-    const response = await Cars.getAll(searchItem);
-    dispatch(getAll(response.data));
-  };
-
-  const handleChange = debounce((e) => handleSearch(e.target.value), 500);
+  const handleChange = debounce(async ({ target: { value } }) => {
+    dispatch(setSearchTerm(value));
+  }, 500);
 
   return (
     <header>
