@@ -81,7 +81,7 @@ export default function AppCarsComponent() {
 
   return (
     <ul>
-      {selectedCarsIds.length}
+      No of selected cars: <strong>{selectedCarsIds.length}</strong>
       <br />
       <button className="btn btn-blue" onClick={selectAll}>
         Select All
@@ -113,7 +113,7 @@ export default function AppCarsComponent() {
       <button className="btn btn-blue" onClick={handlePreviousPage}>
         Previous
       </button>
-      Page: {page}
+      Page: <strong>{page}</strong>
       <button className="btn btn-blue" onClick={handleNextPage}>
         Next
       </button>
