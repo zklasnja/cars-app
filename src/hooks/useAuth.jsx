@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { authService } from "../services/AuthService";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData } from "../store/user/selectors";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUserData);
+
   const [user, setUser] = useState({});
 
   const handleLogin = async (data) => {

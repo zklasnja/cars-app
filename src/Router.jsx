@@ -1,8 +1,8 @@
 import React from "react";
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
 
-import AppCars from './pages/AppCars';
+import AppCars from "./pages/AppCars";
 import AddCar from "./pages/AddCar";
 import AppLogin from "./pages/AppLogin";
 import RegisterPage from "./pages/AppRegister";
@@ -24,33 +24,31 @@ const GuestRoute = ({ children, ...rest }) => {
   );
 };
 
-export default function Router(){
-    return (
-        <Switch>
-          <AuthRoute exact path='/cars'>
-            <AppCars />
-          </AuthRoute>
-          <AuthRoute path='/cars/:carId'>
-            <SingleCarPage />
-          </AuthRoute>
-          <AuthRoute path='/add'>
-            <AddCar />
-          </AuthRoute>
-          <AuthRoute path='/edit/:id'>
-            <AddCar />
-          </AuthRoute>
-          <AuthRoute path='/delete/:id'>
-            <AppCars />
-          </AuthRoute>
-          <GuestRoute path='/register'>
-            <RegisterPage />
-          </GuestRoute>
-          <GuestRoute path='/login'>
-            <AppLogin />
-          </GuestRoute>
-          <AuthRoute path='/logout'>
-            {/* <AppLogout /> */}
-          </AuthRoute>
-        </Switch>
-    )
+export default function Router() {
+  return (
+    <Switch>
+      <AuthRoute exact path="/cars">
+        <AppCars />
+      </AuthRoute>
+      <AuthRoute path="/cars/:carId">
+        <SingleCarPage />
+      </AuthRoute>
+      <AuthRoute path="/add">
+        <AddCar />
+      </AuthRoute>
+      <AuthRoute path="/edit/:id">
+        <AddCar />
+      </AuthRoute>
+      <AuthRoute path="/delete/:id">
+        <AppCars />
+      </AuthRoute>
+      <GuestRoute path="/register">
+        <RegisterPage />
+      </GuestRoute>
+      <GuestRoute path="/login">
+        <AppLogin />
+      </GuestRoute>
+      <AuthRoute path="/logout"></AuthRoute>
+    </Switch>
+  );
 }
