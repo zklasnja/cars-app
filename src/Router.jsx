@@ -12,7 +12,7 @@ const AuthRoute = ({ children, ...rest }) => {
   const { user } = useAuth();
 
   return (
-    <Route {...rest}>{user.name ? children : <Redirect to="/login" />}</Route>
+    <Route {...rest}>{user.token ? children : <Redirect to="/login" />}</Route>
   );
 };
 
@@ -20,7 +20,7 @@ const GuestRoute = ({ children, ...rest }) => {
   const { user } = useAuth();
 
   return (
-    <Route {...rest}>{user.name ? <Redirect to="/cars" /> : children}</Route>
+    <Route {...rest}>{user.token ? <Redirect to="/cars" /> : children}</Route>
   );
 };
 

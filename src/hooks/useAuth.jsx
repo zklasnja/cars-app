@@ -1,23 +1,18 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
 import { authService } from "../services/AuthService";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { setToken, setUser } from "../store/user/slice";
 import { selectUserData } from "../store/user/selectors";
+import { useDispatch, useSelector } from "react-redux";
 
-const AuthContext = createContext(null);
-
-export function AuthProvider({ children }) {
+export default function useAuth() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const userData = useSelector(selectUserData);
-
-  const [user, setUser] = useState({});
+  const user = useSelector(selectUserData);
 
   const handleLogin = async (data) => {
     try {
       const response = await authService.login(data);
-      setUser(response.data.user);
-      history.push("/cars");
+      dispatch(setUser(response.data));
     } catch (error) {}
   };
 
@@ -26,17 +21,15 @@ export function AuthProvider({ children }) {
       const response = await authService.logout();
       if (response) {
         localStorage.removeItem("token");
-        setUser({});
-        history.push("/");
+        dispatch(setToken(""));
       }
-      history.push("/cars");
     } catch (error) {}
   };
 
   const handleRegister = async (data) => {
     try {
       const response = await authService.register(data);
-      setUser(response.data.user);
+      dispatch(setUser(response.data));
       history.push("/login");
     } catch (error) {}
   };
@@ -46,7 +39,7 @@ export function AuthProvider({ children }) {
     if (!!token) {
       try {
         const response = await authService.refresh();
-        setUser(response.data.user);
+        dispatch(setUser(response.data));
       } catch (error) {}
     }
   };
@@ -55,26 +48,11 @@ export function AuthProvider({ children }) {
     return localStorage.getItem(value);
   };
 
-  useEffect(() => {
-    handleGetItemFromLS("token");
-    handleRefreshToken();
-  }, []);
-
-  return (
-    <AuthContext.Provider
-      value={{
-        user: user,
-        login: handleLogin,
-        logout: handleLogout,
-        refresh: handleRefreshToken,
-        register: handleRegister,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
-export default function useAuth() {
-  return useContext(AuthContext);
+  return {
+    user: user,
+    login: handleLogin,
+    logout: handleLogout,
+    refresh: handleRefreshToken,
+    register: handleRegister,
+  };
 }

@@ -5,7 +5,7 @@ class AuthService {
     this.axiosInstance = httpService.axiosInstance;
     this.setAxiosAuthorisationHeader();
   }
-  
+
   setAxiosAuthorisationHeader(tokenParam = null) {
     try {
       let token = tokenParam ? tokenParam : localStorage.getItem("token");
@@ -14,7 +14,7 @@ class AuthService {
           "Authorization"
         ] = `Bearer ${token}`;
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 
   async register(data) {
@@ -26,10 +26,15 @@ class AuthService {
         return response;
       }
     } catch (error) {
-      alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
+      alert(
+        JSON.stringify([
+          { Error: error.message },
+          { Message: error.response.data.message },
+        ])
+      );
     }
   }
-  
+
   async login(data) {
     try {
       let response = await this.axiosInstance.post("/login", data);
@@ -39,7 +44,12 @@ class AuthService {
         return response;
       }
     } catch (error) {
-      alert(JSON.stringify([{ Error: error.message }, { Message: error.response.data.message }]))
+      alert(
+        JSON.stringify([
+          { Error: error.message },
+          { Message: error.response.data.message },
+        ])
+      );
     }
   }
 
@@ -47,9 +57,9 @@ class AuthService {
     try {
       const response = await this.axiosInstance.post("/logout");
       return response;
-    } catch (error) { }
+    } catch (error) {}
   }
-  
+
   async refresh() {
     try {
       const response = await this.axiosInstance.post("/refresh");

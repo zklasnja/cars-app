@@ -5,7 +5,6 @@ export const userSlice = createSlice({
   initialState: {
     name: "",
     email: "",
-    password: "",
     created_at: "",
     updated_at: "",
     id: "",
@@ -16,8 +15,8 @@ export const userSlice = createSlice({
       state.email = action.payload.email;
       state.password = action.payload.password;
     },
-    refresh: (state, action) => {
-      state.token = action.payload.token;
+    setToken: (state, { payload }) => {
+      state.token = payload.token;
     },
     toRegister: (state, action) => {
       state.name = action.payload.name;
@@ -25,9 +24,18 @@ export const userSlice = createSlice({
       state.password = action.payload.password;
     },
     logout: () => {},
+    setUser: (state, { payload }) => {
+      state.name = payload.user.name;
+      state.email = payload.user.email;
+      state.id = payload.user.id;
+      state.created_at = payload.user.created_at;
+      state.updated_at = payload.user.updated_at;
+      state.token = payload.authorisation.token;
+    },
   },
 });
 
-export const { toLogin, logout, refresh, toRegister } = userSlice.actions;
+export const { toLogin, logout, setToken, toRegister, setUser } =
+  userSlice.actions;
 
 export default userSlice.reducer;

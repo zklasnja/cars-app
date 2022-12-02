@@ -28,7 +28,6 @@ export default function AppRegisterComponent() {
           placeholder="Name"
           type="text"
           name="name"
-          value={userData.name}
           onChange={({ target }) =>
             dispatch(toRegister({ ...userData, name: target.value }))
           }
@@ -38,7 +37,6 @@ export default function AppRegisterComponent() {
           placeholder="Email"
           type="email"
           name="email"
-          value={userData.email}
           onChange={({ target }) =>
             dispatch(toRegister({ ...userData, email: target.value }))
           }
@@ -47,7 +45,6 @@ export default function AppRegisterComponent() {
           className="input-text"
           placeholder="Password"
           type="password"
-          value={userData.password}
           onChange={({ target }) =>
             dispatch(toRegister({ ...userData, password: target.value }))
           }

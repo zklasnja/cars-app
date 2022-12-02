@@ -1,20 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserData } from "../store/user/selectors";
-import { toLogin } from "../store/user/slice";
-
 export default function AppLoginComponent() {
-  const userData = useSelector(selectUserData);
-  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { login } = useAuth();
 
   const handleOnLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(userData);
+      await login({ email, password });
     } catch (error) {}
   };
   return (
@@ -24,19 +20,13 @@ export default function AppLoginComponent() {
           className="input-text"
           placeholder="Email"
           type="email"
-          value={userData.email}
-          onChange={({ target }) =>
-            dispatch(toLogin({ ...userData, email: target.value }))
-          }
+          onChange={({ target }) => setEmail(target.value)}
         />
         <input
           className="input-text"
           placeholder="Password"
           type="password"
-          value={userData.password}
-          onChange={({ target }) =>
-            dispatch(toLogin({ ...userData, password: target.value }))
-          }
+          onChange={({ target }) => setPassword(target.value)}
         />
         <button type="submit" className="btn btn-blue">
           Login

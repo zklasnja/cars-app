@@ -9,6 +9,7 @@ export default function AppCarsComponent() {
   const dispatch = useDispatch();
   const carsData = useSelector(selectCarsData);
   const searchTerm = useSelector(selectSearchterm);
+
   const [selectedCarsIds, setSelectedCarsIds] = useState([]);
   const [page, setPage] = useState(1);
 
